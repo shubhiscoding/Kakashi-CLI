@@ -1,4 +1,4 @@
-use std::{fs, fs::File, io::Write};
+use std::{fs::{self, File, OpenOptions}, io::Write};
 
 use crate::commands::get_env_dir;
 
@@ -15,4 +15,12 @@ pub fn switch_to_env(switch_to: String) {
     env_file
         .write_all(content.as_bytes())
         .expect("Failed to write to .env file");
+
+    let mut config = OpenOptions::new()
+        .create(true)
+        .append(true)
+        .open(".kakashi/config")
+        .unwrap();
+
+    writeln!(config, "current_env={}", switch_to).unwrap();
 }

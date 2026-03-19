@@ -4,6 +4,7 @@ mod commands;
 use commands::init_kakashi;
 use commands::list_envs;
 use commands::switch_to_env;
+use commands::current_env;
 
 #[derive(Parser)]
 #[command(name = "kakashi")]
@@ -35,7 +36,7 @@ fn main() {
             switch_to_env(env);
         }
         Commands::Current => {
-            println!("Current env...");
+            current_env();
         }
     }
 }
