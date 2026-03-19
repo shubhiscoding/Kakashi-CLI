@@ -31,6 +31,12 @@ Kakashi is a lightweight CLI tool written in Rust that helps you manage multiple
 Perfect for managing different configurations for development, staging, and production environments, or for swapping between different sets of API keys and credentials.
 
 ## Installation
+Install [Crates.io](https://crates.io/crates/kakashi) published package
+```
+cargo install kakashi
+```
+
+OR
 
 Clone the repository and install using Cargo:
 
