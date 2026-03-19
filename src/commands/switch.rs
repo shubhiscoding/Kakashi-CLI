@@ -1,6 +1,6 @@
 use std::{fs::{self, File, OpenOptions}, io::Write};
 
-use crate::commands::get_env_dir;
+use crate::commands::{get_env_dir, print_ln};
 
 pub fn switch_to_env(switch_to: String) {
     let path = get_env_dir(&switch_to);
@@ -23,4 +23,7 @@ pub fn switch_to_env(switch_to: String) {
         .unwrap();
 
     writeln!(config, "current_env={}", switch_to).unwrap();
+    print_ln();
+    println!("Switched to {}!", switch_to);
+    print_ln();
 }
