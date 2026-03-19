@@ -1,7 +1,9 @@
 use clap::{Parser, Subcommand};
 
 mod commands;
-use commands::init;
+use commands::init_kakashi;
+use commands::list_envs;
+use commands::switch_to_env;
 
 #[derive(Parser)]
 #[command(name = "kakashi")]
@@ -24,13 +26,13 @@ fn main() {
 
     match cli.command {
         Commands::Init { path } => {
-            init(&path);
+            init_kakashi(&path);
         }
         Commands::List => {
-            println!("Listing envs...");
+            list_envs();
         }
         Commands::Switch { env } => {
-            println!("Switching to {}", env);
+            switch_to_env(env);
         }
         Commands::Current => {
             println!("Current env...");
