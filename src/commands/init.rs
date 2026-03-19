@@ -2,7 +2,7 @@ use std::fs::{self};
 use std::io::Write;
 use std::env;
 use std::path::Path;
-use crate::commands::{list_envs, print_ln};
+use crate::commands::{print_ln};
 use crate::commands::print_kakashi;
 pub fn init_kakashi(path: &str){
     let path = path.trim_matches(|c| c == '/' || c == '\\');
