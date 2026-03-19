@@ -1,33 +1,33 @@
-use std::fs::{self, DirEntry};
+use std::fs::{self};
 use std::io::Write;
 
-fn read_envs(path: &str) {
-    match fs::read_dir(path) {
-        Ok(entries) => {
-        println!("Found: ");
-            for entry in entries {
-                if let Ok(entry) = entry {
-                    let path = entry.path();
-                    if let Some(filename) = path.file_name() {
-                        let filename = filename.to_string_lossy();
-                        if filename.starts_with(".env.") {
-                            println!("{}", filename);
-                        }
-                    }
-                }
-            }
-        }
-        Err(e) => eprintln!("Error reading directory: {}", e),
-    }
-}
-
-pub fn init(path: &str){
+use crate::commands::list_envs;
+use crate::commands::print_kakashi;
+pub fn init_kakashi(path: &str){
     fs::create_dir_all(".kakashi").unwrap();
 
     let mut config = fs::File::create(".kakashi/config").unwrap();
 
     writeln!(config, "env_dir={}", path).unwrap();
+    print_kakashi();
     println!("Initialized kakashi with env path: {}", path);
 
-    read_envs(path);
+    list_envs();
+}
+
+pub fn get_env_dir(envs: &str) -> String{
+    let content = fs::read_to_string(".kakashi/config")
+        .expect("Run `kakashi init <path>` first");
+
+    for line in content.lines() {
+        if line.starts_with("env_dir=") {
+            match envs {
+                "all_envs" => {return line.replace("env_dir=", "");}
+                "" => {return format!("{}/.env", line.replace("env_dir=", ""));}
+                _ => {return format!("{}/.env.{}", line.replace("env_dir=", ""), envs);}
+            }
+        }
+    }
+
+    panic!("Invalid config");
 }
