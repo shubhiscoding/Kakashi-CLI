@@ -1,6 +1,6 @@
 [package]
 name = "kakashi"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2024"
 description = "Smart CLI to manage .env environments"
 license = "MIT"
