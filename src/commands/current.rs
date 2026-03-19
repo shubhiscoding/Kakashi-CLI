@@ -29,6 +29,8 @@ pub fn current_env(){
             return ();
         }
     }
-
+    print_ln();
+    println!("Please run kakashi switch <ENV>, atleast once to record the current env!");
+    print_ln();
     panic!("Invalid config");
 }
